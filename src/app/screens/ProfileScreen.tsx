@@ -17,10 +17,6 @@ export function ProfileScreen() {
     { icon: Settings, label: t('profile.settings'), path: '/settings', count: null },
   ];
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login');
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-24">
       {/* Header */}
