@@ -8,11 +8,18 @@ export function ProfileScreen() {
   const navigate = useNavigate();
   const { t } = useLanguage();
 
+  const name = localStorage.getItem("userName");
+  const email = localStorage.getItem("userEmail");
+
   const menuItems = [
     { icon: Bookmark, label: t('profile.savedMajors'), path: '/saved-majors', count: 12 },
     { icon: History, label: t('profile.quizHistory'), path: '/quiz-history', count: 3 },
     { icon: Settings, label: t('profile.settings'), path: '/settings', count: null },
   ];
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-24">
@@ -39,8 +46,13 @@ export function ProfileScreen() {
               <User className="w-10 h-10 text-white" />
             </div>
             <div className="flex-1">
-              <h2 className="text-xl text-gray-800 mb-1">John Doe</h2>
-              <p className="text-sm text-gray-600">john.doe@example.com</p>
+              <h2 className="text-xl text-gray-800 mb-1">
+                {name || "Guest User"}
+              </h2>
+
+              <p className="text-sm text-gray-600">
+                {email || "guest@email.com"}
+              </p>
               <p className="text-xs text-gray-500 mt-1">Grade 12 Student</p>
             </div>
           </div>
@@ -120,7 +132,10 @@ export function ProfileScreen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          onClick={() => navigate('/login')}
+          onClick={() => {
+          localStorage.clear();
+          navigate('/login');
+          }}
           className="w-full bg-red-500/10 backdrop-blur-xl rounded-2xl p-5 shadow-lg border border-red-200 hover:shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 text-red-600"
         >
           <LogOut className="w-5 h-5" />
